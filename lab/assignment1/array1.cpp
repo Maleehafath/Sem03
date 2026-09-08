@@ -86,9 +86,8 @@ void array1<T>::insert_at_position(int p, T key)
         cout << "invalid position" << endl;
         return;
     }
- 
-compilation terminated.
-    for (int i = ub; i >= p; i--)
+    int i;
+    for (i = ub;i >= p; i--)
     {
         a[i + 1] = a[i];
     }
