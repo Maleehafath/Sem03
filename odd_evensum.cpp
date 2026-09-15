@@ -1,36 +1,44 @@
 #include <iostream>
-// Function to calculate the sum of squares of odd and even numbers
-void sumsquare(const int l[], int n, long long result[]) {
+#include <vector>
+
+// Uses standard C++11/14/17 compatible signature
+void sumsquare(const std::vector<int>& l, long long result[2]) {
     long long odd_sum = 0;
     long long even_sum = 0;
 
-    for (int i = 0; i < n; ++i) {
-        long long square = static_cast<long long>(l[i]) * l[i];
-        
-        if (l[i] % 2 != 0) {
+    for (int val : l) {
+        long long square = static_cast<long long>(val) * val;
+        if (val % 2 != 0) {
             odd_sum += square; // Odd number
         } else {
             even_sum += square; // Even number
         }
     }
 
-    // Store results: result[0] = odd sum, result[1] = even sum
     result[0] = odd_sum;
     result[1] = even_sum;
 }
 
 int main() {
-    // Example array
-    int l[] = {1, 2, 3, 4, 5};
-    int n = 5;
-    long long result[2]; // Array to store [odd_sum, even_sum]
+    int n = 0;
+    std::cout << "Enter the number of elements (n): ";
+    if (!(std::cin >> n) || n <= 0) {
+        std::cerr << "Invalid size entered.\n";
+        return 1;
+    }
 
-    sumsquare(l, n, result);
+    std::vector<int> l(n);
+    std::cout << "Enter " << n << " elements separated by spaces: ";
+    for (int i = 0; i < n; ++i) {
+        std::cin >> l[i];
+    }
 
-    // Displaying the results
-    std::cout << "Array elements: {1, 2, 3, 4, 5}\n";
-    std::cout << "Sum of squares of odd numbers: " << result[0] << " (1^2 + 3^2 + 5^2 = 1 + 9 + 25)\n";
-    std::cout << "Sum of squares of even numbers: " << result[1] << " (2^2 + 4^2 = 4 + 16)\n";
+    long long result[2];
+    sumsquare(l, result);
+
+    std::cout << "\nResults:\n";
+    std::cout << "Sum of squares of odd numbers: " << result[0] << "\n";
+    std::cout << "Sum of squares of even numbers: " << result[1] << "\n";
 
     return 0;
 }
