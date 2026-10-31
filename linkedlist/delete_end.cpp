@@ -1,0 +1,65 @@
+
+#include <iostream>
+using namespace std;
+
+struct Node
+{
+    int data;
+    Node* next;
+};
+
+int main()
+{
+    Node *head = NULL, *temp, *newnode;
+
+    int n;
+    cout << "Enter number of nodes: ";
+    cin >> n;
+
+    for (int i = 0; i < n; i++)
+    {
+        newnode = new Node;
+        cin >> newnode->data;
+        newnode->next = NULL;
+
+        if (head == NULL)
+            head = newnode;
+        else
+        {
+            temp = head;
+            while (temp->next != NULL)
+                temp = temp->next;
+
+            temp->next = newnode;
+        }
+    }
+
+    if (head == NULL)
+        cout << "List is empty";
+    else if (head->next == NULL)
+    {
+        delete head;
+        head = NULL;
+    }
+    else
+    {
+        temp = head;
+
+        while (temp->next->next != NULL)
+            temp = temp->next;
+
+        delete temp->next;
+        temp->next = NULL;
+    }
+
+    cout << "\nLinked list after deletion: ";
+    temp = head;
+
+    while (temp != NULL)
+    {
+        cout << temp->data << " ";
+        temp = temp->next;
+    }
+
+    return 0;
+}
